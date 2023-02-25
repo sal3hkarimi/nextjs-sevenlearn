@@ -2,11 +2,17 @@
 // import Image from 'next/image'
 // import { Inter } from 'next/font/google'
 // import styles from '@/styles/Home.module.css'
-
 // const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ posts }) {
-  const postTitle = posts.map(post => <p key={post.id}>{post.title}</p>)
+import {loadPosts} from '../lib/posts'
+
+type homeProps = {
+  posts?: any
+  post?: any
+}
+
+export default function Home({ posts }:homeProps) {
+  const postTitle = posts.map((post:any) => <p key={post.id}>{post.title}</p>)
 
   return (
     <>
@@ -19,10 +25,7 @@ export default function Home({ posts }) {
 
 
 export async function getStaticProps() {
-  const posts = [
-    { id: 1, title: 'post 1' },
-    { id: 2, title: 'post 2' },
-  ]
+  const posts = await loadPosts()  
 
   return {
     props: {
