@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker');
 module.exports = function () {
     const data = { posts: [] }
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 2; i++) {
         data.posts.push({
             id: faker.datatype.uuid(),
             slug: faker.lorem.slug(),
