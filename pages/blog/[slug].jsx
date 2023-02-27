@@ -6,9 +6,9 @@ function Blog({ post }) {
     const router = useRouter()
     const { slug } = router.query
 
-    if(router.isFallback){
-        return <div>Loading...</div>
-    }
+    // if(router.isFallback){
+    //     return <div>Loading...</div>
+    // }
 
     return (
         <div>
@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: true
+        fallback: 'blocking'
     }
 }
 
