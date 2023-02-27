@@ -19,22 +19,40 @@ function Blog({ post }) {
     )
 }
 
-export async function getStaticPaths() {
-    const posts = await loadPosts()
-    const paths = posts.map(post => ({
-        params: { slug: post.slug }
-    }))
+// export async function getStaticPaths() {
+//     const posts = await loadPosts()
+//     const paths = posts.map(post => ({
+//         params: { slug: post.slug }
+//     }))
 
-    return {
-        paths,
-        fallback: 'blocking'
-    }
-}
+//     return {
+//         paths,
+//         fallback: 'blocking'
+//     }
+// }
 
-export async function getStaticProps({ params }) {
+// export async function getStaticProps({ params }) {
+//     const post = await getPost(params.slug)
+
+//     if(!post[0]){
+//         return {
+//             notFound: true
+//         }
+//     }
+
+//     return {
+//         props: {
+//             post: post[0]
+//         },
+//         revalidate: 1
+//     }
+// }
+
+
+export async function getServerSideProps({ params }) {
     const post = await getPost(params.slug)
 
-    if(!post[0]){
+    if (!post[0]) {
         return {
             notFound: true
         }
@@ -43,9 +61,9 @@ export async function getStaticProps({ params }) {
     return {
         props: {
             post: post[0]
-        },
-        revalidate: 1
+        }
     }
 }
+
 
 export default Blog
